@@ -28,36 +28,10 @@
   color: #61dafb;
 }
 
-/* .cardButton {
-  z-index: -1;
-}
-
-.cardButton:hover {
-  background-color: #bbc6cd7d;
-  border-radius: 1%;
-}
-
-.cardButton:active {
-  background-color: #bbc6cdb6;
-  border-radius: 1%;
-} */
-
 .leftCentered {
   padding-left: 1rem;
   text-align: left;
 }
-
-/* .mainImage {
-  border-radius: 1%; 
-  object-fit: cover;
-  width: 100%;
-} */
-
-/* .cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-} */
 
 .singleImage {
   border-radius: 0%;
@@ -100,19 +74,8 @@
   background-color: #bcdff7;
 }
 
-/* .heading {
-  text-align: center;
-  padding-top: 20px;
-  font-size: larger;
-} */
-
-/* .singleCard img {
-  border: 2px solid black;
-} */
-
 .card-content {
   margin: 10px;
-  /* border: 2px solid black; */
   border-radius: 8px;
   z-index: 0;
 }
@@ -162,42 +125,7 @@
   border-bottom: 2px solid #4249eb;
 }
 
-/* .userProfileContainer {
-  background-color: #d9d9d9;
-  border: #282c34 solid;
-  margin-bottom: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-top: 0.5rem;
-  overflow: hidden;
-} */
-
-/* .userProfileImageContainer {
-  margin-top: 1rem;
-  width: 300px; 
-  height: 300px; 
-  overflow: hidden; 
-  border-radius: 50%;
-} */
-
-/* .userProfileImageContainer img {
-  margin: 0 auto;
-  width: 100%; 
-  height: 100%;
-  object-fit: cover; 
-  transform: scale(1.2); 
-} */
-
-/* .userProfileImageContainer:hover img {
-  transform: scale(1.4);
-  transition: transform 0.3s ease; 
-} */
-
 .badgeContainer {
-  /* display: flex; */
-
   margin-left: 5rem;
   margin-top: 32px;
   padding-top: 12px;
@@ -207,22 +135,6 @@
   background-color: #d9d9d9;
 }
 
-/* .aboutContainer {
-  background-color: #d9d9d9;
-  margin-bottom: 2px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2px;
-  overflow: hidden;
-  border: #282c34 solid;
-} */
-
-/* .aboutContainer p {
-  padding-left: 3rem;
-  text-align: left;
-} */
 .editButton {
   margin-top: 15px;
   padding: 0 10px;
@@ -269,56 +181,6 @@
   border: 2;
   background-color: #3a39393d;
 }
-/* .profileContainer {
-  display: flex;
-  justify-content: space-between;
-} */
-/* .leftContainer {
-  flex-basis: 40%;
-  margin-left: 1rem;
-  display: flex;
-  flex-direction: column;
-  margin-right: 4px;
-} */
-
-/* .middleContainer {
-  margin-left: 4px;
-  margin-right: 3px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-} */
-
-/* .rightContainer {
-  flex-basis: 60%;
-  display: flex;
-  flex-direction: column;
-  margin-left: 1px;
-  padding-right: 1rem;
-} */
-
-/* .usersPhotos {
-  margin-top: 0;
-  margin-bottom: 7px;
-  padding-top: 0%;
-  margin-right: 0;
-  background-color: #d9d9d9;
-} */
-
-/* .usersLikedPhotos {
-  margin-top: 0;
-  margin-bottom: 7px;
-  padding-top: 0%;
-  margin-right: 0;
-  background-color: #d9d9d9;
-} */
-
-/* .miniPosts {
-  text-align: center;
-  height: 411px; 
-  overflow: auto; 
-} */
 
 .followerContainerImg {
   /* flex: 1; */
@@ -337,8 +199,8 @@
 }
 
 .followerContainerImg:hover img {
-  transform: scale(1.2); /* You can adjust the scaling factor as needed */
-  transition: transform 0.3s ease; /* Add a smooth transition effect */
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
 }
 
 .followerContainer {
@@ -352,7 +214,7 @@
   justify-content: center;
   overflow: hidden;
   width: 95%;
-  box-sizing: border-box; /* Include padding and border in the specified width */
+  box-sizing: border-box;
 }
 
 .followerContainer h2 {
@@ -360,7 +222,6 @@
 }
 
 .followerContainer button {
-  /* display: block; */
   width: 100px;
   height: 30px;
   font-size: medium;
@@ -392,18 +253,13 @@
   margin-right: "10px";
 }
 
-/* .aboutMeCategories {
-  float: left;
-} */
-
 .line {
   border: 1px solid #ccc;
   margin-left: 10px;
 }
 
-/* Formating button */
 .overlay-button {
-  position: absolute; /* Position the overlay button relative to the container */
+  position: absolute;
   top: 0;
   left: 0;
   background-color: rgba(
@@ -411,15 +267,13 @@
     0,
     0,
     0
-  ); /* Make the button background transparent */
-  cursor: pointer; /* Show the pointer cursor when hovering over the button */
+  );
+  cursor: pointer;
   opacity: 0;
   z-index: 1;
 }
 
-/* Styling button */
 .overlay-button {
-  /* background-color: #ffffff; */
   color: white;
   margin: 2px;
   padding: 0 2px;
@@ -427,8 +281,6 @@
   border-radius: 15%;
   text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
     1px 1px 0 black;
-  /* text-shadow: -2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white, */
-  /* 2px 2px 0 white; */
 }
 
 .overlay-button:hover {
@@ -449,15 +301,6 @@
   color: #0008fb;
 }
 
-/* .likeButton {
-  position: absolute; 
-  bottom: 0;
-  right: 0;
-  padding-right: 2px;
-  cursor: pointer;  
-} 
-
-
 .likeButton {
   z-index: 1;
 } */
@@ -473,27 +316,24 @@
 }
 
 .scrollable-container::-webkit-scrollbar {
-  /* display: none;  */
 }
 
 .scrollable-container::-webkit-scrollbar {
-  width: 8px; /* Set the width of the scrollbar */
+  width: 8px;
 }
 
 .scrollable-container::-webkit-scrollbar-thumb {
-  background-color: #888; /* Set the color of the scrollbar thumb (the draggable part) */
-  border-radius: 4px; /* Add some border-radius for a rounded look */
+  background-color: #888;
+  border-radius: 4px;
 }
 
 .scrollable-container::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Set the color of the scrollbar thumb on hover */
+  background-color: #555;
 }
 
 .scrollable-container::-webkit-scrollbar {
-  /* Other styles from previous steps... */
   position: absolute;
   padding-left: 10px;;
   right: 0px;
   top: 10px;
-  /* Adjust 'right' and 'top' values as needed to position the scrollbar */
 }

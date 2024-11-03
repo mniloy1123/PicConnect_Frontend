@@ -29,11 +29,9 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // User is signed in, get the token and send it to backend
         const token = await user.getIdToken(true);
         sendTokenToBackend(token);
 
-        // Dispatch the user data to Redux state
         dispatch(
           setUserData({
             uid: user.uid,
@@ -43,8 +41,6 @@ function App() {
         );
       }
     });
-
-    // Clean up subscription on unmount
     return () => unsubscribe();
   }, [dispatch]);
   return (
@@ -62,8 +58,6 @@ function App() {
           <Route path="/SignIn" element={<SignIn />}></Route>
           <Route path="/SignUp" element={<SignUp />}></Route>
           <Route path="/photos/:postId" element={<ViewPost />}></Route>
-          {/* Delete line 40 uncomment line 42 when backend is working */}
-          {/* <Route path="/viewPost/:postID" element={<ViewPost />}></Route> */}
         </Routes>
         </Suspense>
         <Footer></Footer>

@@ -17,13 +17,8 @@ const SingleView = ({ postcard, userId, postId }) => {
   const slides = useRef([]);
   const slideSayisi = slides.current.length;
   const currentUser = useSelector((state) => state.user.value);
-  const post = useSelector((state) => state.posts.currentPost); // this depends on where the fetched post data is stored in your state
-  //console.log(post);
+  const post = useSelector((state) => state.posts.currentPost);
   const likesCount = post ? post.likesCount : 0;
-  /*console.log(likesCount);
-  console.log("in another page pc", postcard);
-  console.log("author name", postcard.user?.about);
-  console.log("total", postcard.tags?.length);*/
 
   const url = postcard.urls;
   const allTags = [];
@@ -32,12 +27,11 @@ const SingleView = ({ postcard, userId, postId }) => {
       allTags.push(eachTag.tag_name);
     });
   }
-  const lat = postcard.location?.latitude;
-  const lng = postcard.location?.longitude;
+  // const lat = postcard.location?.latitude;
+  // const lng = postcard.location?.longitude;
 
-  //const socket = io("${process.env.REACT_APP_BACKEND_URL}", { withCredentials: true });
-  const [comments, setComments] = useState([]); //state to hold comments
-  const [currentComment, setCurrentComment] = useState(""); // state to hold current comment input
+  const [comments, setComments] = useState([]);
+  const [currentComment, setCurrentComment] = useState("");
   const [loadingComment, setLoadinComment] = useState(true);
   const [currentReply, setCurrentReply] = useState("");
   const [deletionOccured, setDeletionOccured] = useState(false);
@@ -56,15 +50,14 @@ const SingleView = ({ postcard, userId, postId }) => {
 
   useEffect(() => {
     if (socket == null) {
-      //uncommented this if statement
       socket = io(`${process.env.REACT_APP_BACKEND_URL}`, {
         withCredentials: true,
       });
     }
     return () => {
       console.log("Disconnecting socket...");
-      socket.disconnect(); //removed the existing line here
-      socket = null; //added this line
+      socket.disconnect();
+      socket = null;
     };
   }, []);
 
@@ -72,11 +65,9 @@ const SingleView = ({ postcard, userId, postId }) => {
     if (socket) {
       console.log(`Post ID: ${postId}`);
       console.log("Connecting socket...");
-      //join the room when component mounts
-      socket.emit("joinRoom", postId); // currentId should be the id of the current photo
-
-      socket.off("newComment"); //remove existing event listener before creating a new one
-      socket.off("newReply"); //remove existing event listener before creating a new one
+      socket.emit("joinRoom", postId);
+      socket.off("newComment");
+      socket.off("newReply");
 
       //event listener for incoming comments
       socket.on("newComment", (newComment) => {
@@ -84,13 +75,11 @@ const SingleView = ({ postcard, userId, postId }) => {
         setComments((oldComments) => [...oldComments, newComment]);
       });
 
-      //event listener for incoming comments
       socket.on("newReply", (newReply) => {
         console.log(`New reply received: ${newReply}`);
         setComments((oldReply) => [...oldReply, newReply]);
       });
 
-      //event listener for existing comments
       socket.on("existingComments", (existingComments) => {
         setLoadinComment(false);
         console.log(`Existing comments received: `, ...existingComments);
@@ -98,12 +87,6 @@ const SingleView = ({ postcard, userId, postId }) => {
       });
       console.log("list ins comme", comments);
     }
-
-    // return () => {
-    //   console.log("Disconnecting socket...");
-    //   socket.off('newComment'); // Remove the event listener
-    //   socket.disconnect(); // Disconnect the socket
-    // }
   }, [postId, currentReply, deletionOccured, parentCommentAdded]);
 
   const RedirectMessage = useIfNotAuthenticated("SingleView");
@@ -150,23 +133,17 @@ const SingleView = ({ postcard, userId, postId }) => {
     console.log(`the comment with id: ${replyId} was deleted`);
   };
 
-  // function to handle new reply submission
-  // function to handle new reply submission
   const handleNewReply = (event, commentId) => {
     event.preventDefault();
     console.log("posted a comment ..", currentReply);
-    // Create the newReplyData object with relevant information
     const newReplyData = {
-      roomId: commentId, // Set the roomId to the commentId
-      reply: currentReply, // Get the reply from the currentReply state variable
-      userId: currentUser?.uid, // Get the userId (if available, using optional chaining)
+      roomId: commentId,
+      reply: currentReply,
+      userId: currentUser?.uid,
     };
 
-    // Emit the "newReply" event to the socket server with newReplyData
     socket.emit("newReply", newReplyData);
-    // Log the submitted reply data for debugging purposes
     console.log(`New reply submitted: ${JSON.stringify(newReplyData)}`);
-    // Clear the input field by updating the currentReply state variable
     setCurrentReply("");
   };
 
@@ -193,8 +170,7 @@ const SingleView = ({ postcard, userId, postId }) => {
                 id="viewerBox"
                 className="lg:p-10 md:p-6 p-4 bg-white dark:bg-gray-900 "
               >
-                <div 
-                className="mt-3 md:mt-4 lg:mt-0 flex flex-col lg:flex-row items-strech justify-center lg:space-x-8">
+                <div className="mt-3 md:mt-4 lg:mt-0 flex flex-col lg:flex-row items-strech justify-center lg:space-x-8">
                   <div className="lg:w-3/5 flex justify-center items-center items-strech bg-gray-50  px-2 py-20 md:py-6 md:px-6 lg:py-24">
                     <div className="slider">
                       <div className="slide-ana lg:relative">
@@ -206,7 +182,6 @@ const SingleView = ({ postcard, userId, postId }) => {
                             <img
                               className="mb-4 shadow-[rgba(6,_24,_44,_0.4)_0px_0px_0px_2px,_rgba(6,_24,_44,_0.65)_0px_4px_6px_-1px,_rgba(255,_255,_255,_0.08)_0px_1px_0px_inset]"
                               src={url}
-                              // className="card-img-top"
                               alt="..."
                               loading="lazy"
                             />
@@ -215,18 +190,16 @@ const SingleView = ({ postcard, userId, postId }) => {
                       </div>
                     </div>
                   </div>
-                  <div
-                    className=" lg:w-2/5 flex flex-col justify-center mt-7 md:mt-8 lg:mt-0 pb-8 lg:pb-0"
-                  >
+                  <div className=" lg:w-2/5 flex flex-col justify-center mt-7 md:mt-8 lg:mt-0 pb-8 lg:pb-0">
                     <h1 className="text-3xl lg:text-4xl font-semibold text-gray-800 dark:text-white">
-                    Photo Details
+                      Photo Details
                     </h1>
 
-                    <div className="mt-6 scrollable-container" style={{ maxHeight: "500px", overflow: "auto" }}
->
-
+                    <div
+                      className="mt-6 scrollable-container"
+                      style={{ maxHeight: "500px", overflow: "auto" }}
+                    >
                       <div className="flex flex-col justify-center mt-7 md:mt-8 lg:mt-0 pb-8 lg:pb-0">
-                        {/* <p className="leftCentered">Author: {postcard.user?.name}</p> */}
                         <p className="text-base leading-normal text-gray-600 dark:text-white mt-2">
                           <div className="flex items-start space-x-4">
                             <div onClick={navigateToProfile}>
@@ -253,17 +226,12 @@ const SingleView = ({ postcard, userId, postId }) => {
                             </a>
                           ))}
                         </p>
-                        <p 
-                        className="leftCentered text-base leading-normal text-gray-600 dark:text-white mt-2">
+                        <p className="leftCentered text-base leading-normal text-gray-600 dark:text-white mt-2">
                           Location - {postcard.location?.location_name} in{" "}
                           {postcard.location?.city}
                         </p>
                         <div>
-                          {lat && lng ? (
-                            <TomTomMap lat={lat} lng={lng} />
-                          ) : (
-                            <p className="leftCentered">Map data unavailable</p>
-                          )}
+                          <p className="leftCentered">Map data unavailable</p>
                         </div>
                         <p className="leftCentered text-base leading-normal text-gray-600 dark:text-white mt-2">
                           {postcard.description}
@@ -280,8 +248,9 @@ const SingleView = ({ postcard, userId, postId }) => {
                           ISO: {postcard.camera_detail?.iso}
                           <br />
                         </p>
-                        <p className="leftCentered text-base leading-normal text-gray-600 dark:text-white mt-2">Likes: {post.likesCount}</p>
-
+                        <p className="leftCentered text-base leading-normal text-gray-600 dark:text-white mt-2">
+                          Likes: {post.likesCount}
+                        </p>
                       </div>
                       <CommentForm
                         handleCommentChange={handleCommentChange}
