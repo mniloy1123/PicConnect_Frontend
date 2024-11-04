@@ -19,7 +19,6 @@
 //         const marker = new tt.Marker({draggable: false}).setLngLat([lng, lat]);
 //         marker.addTo(map)
 
-//         //clean up the map when unmount
 //         return() => {
 //             map.remove();
 //         };
